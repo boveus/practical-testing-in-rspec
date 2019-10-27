@@ -1,23 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @book.title %>
+  <strong> <%= @book.title %> : <%= @book.subtitle %></strong>
 </p>
-
 <p>
-  <strong>Page count:</strong>
-  <%= @book.page_count %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @book.author_id %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @book.genre_id %>
+  <% if @book.cover_url %>
+    <%= image_tag(@book.cover_url) %>
+  <% end %>
+<p> Page count: <%= @book.page_count %> </p>
+<%= link_to 'Open Library Link', @book.url %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

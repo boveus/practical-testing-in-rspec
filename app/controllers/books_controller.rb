@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :update_book_from_json, only: [:show]
 
   def index
     @books = Book.all
@@ -48,6 +49,9 @@ class BooksController < ApplicationController
   end
 
   private
+  def update_book_from_json
+    OpenLibraryService.update_book_data_from_api(@book)
+  end
 
   def set_book
     @book = Book.find(params[:id])

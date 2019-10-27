@@ -15,5 +15,15 @@
   <%= @author.year_of_death %>
 </p>
 
+<ul>
+  <% @author.books.each do | book |  %>
+  <li>
+    <strong> <%= book.title %> : <%= book.subtitle %></strong>
+    <%= link_to 'Go to book', book_path(book) %>
+  </li>
+  <% end %>
+</ul>
+
+
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>

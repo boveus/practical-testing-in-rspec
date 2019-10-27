@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
+  after_action :create_books, only: [:create]
 
   def index
     @authors = Author.all
@@ -51,8 +52,14 @@ class AuthorsController < ApplicationController
 
   private
 
+  def create_books
+    if @author
+      OpenLibraryService.find_books_by_author(@author.name)
+    end
+  end
+
   def set_author
-    @author = Author.find(params[:id])
+    @author ||= Author.find(params[:id])
   end
 
   def author_params
